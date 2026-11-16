@@ -1,9 +1,14 @@
+package com.storetv
+
 import android.app.DownloadManager
 import android.content.*
 import android.net.Uri
 import android.os.Environment
 import androidx.core.content.FileProvider
 import java.io.File
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import android.os.Bundle
 
 class MainActivity : ComponentActivity() {
 
