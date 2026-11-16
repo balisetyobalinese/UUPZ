@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "store.tv"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "store.tv"
         minSdk = 28 // Android 9 Pie
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
     }
