@@ -2,28 +2,25 @@
   {
     "nama": "Dopamin",
     "versi": "v1.0.8",
-    "ukuran": "15 MB",
     "kategori": "Channel TV",
     "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/dopamin.png",
-    "url": "https://github.com/balisetyobalinese/UUPZ/raw/refs/heads/main/DT1.0.8.apk",
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/DT1.0.8.apk",
     "deskripsi": "TV Online Gratis"
   },
   {
     "nama": "ONN",
     "versi": "v1.7.5",
-    "ukuran": "12 MB",
     "kategori": "Channel TV",
     "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/onn.png",
-    "url": "https://github.com/balisetyobalinese/UUPZ/releases/download/v1.0/ONN-v1.7.5.apk",
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/ONN-v1.7.5.apk",
     "deskripsi": "Channel TV"
   },
   {
     "nama": "Gvision",
     "versi": "v3.0",
-    "ukuran": "18 MB",
     "kategori": "Movie",
     "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/gvision.png",
-    "url": "https://github.com/balisetyobalinese/UUPZ/releases/download/v1.0/Gvision-v3.0.apk",
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/GV3.apk",
     "deskripsi": "Nonton Movie"
   }
 ]
