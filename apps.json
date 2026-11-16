@@ -1,7 +1,7 @@
 [
   {
-    "nama": "DT",
-    "deskripsi": "DT Streaming",
+    "nama": "Dopamine",
+    "deskripsi": "TV Streaming",
     "versi": "1.0.8",
     "ukuran": "APK",
     "icon": "https://via.placeholder.com/90/ff5722/ffffff?text=DT",
@@ -16,8 +16,24 @@
     "apk": "https://balisetyobalinese.github.io/UUPZ/ON1.7.5.apk"
   },
   {
-    "nama": "ITV",
-    "deskripsi": "ITV Indonesia",
+    "nama": "Gvision",
+    "deskripsi": "TV Streaming",
+    "versi": "3.0",
+    "ukuran": "APK",
+    "icon": "https://via.placeholder.com/90/2196F3/ffffff?text=ON",
+    "apk": "https://balisetyobalinese.github.io/UUPZ/GV3.apk"
+  },
+  {
+    "nama": "RBTV",
+    "deskripsi": "Sport Streaming",
+    "versi": "3.2.2",
+    "ukuran": "APK",
+    "icon": "https://via.placeholder.com/90/2196F3/ffffff?text=ON",
+    "apk": "https://balisetyobalinese.github.io/UUPZ/RB.TV.apk"
+  },
+  {
+    "nama": "IonTV",
+    "deskripsi": "TV Indonesia",
     "versi": "11",
     "ukuran": "APK",
     "icon": "https://via.placeholder.com/90/4CAF50/ffffff?text=ITV",
