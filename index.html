@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STORE TV</title>
+<style>
+  *{box-sizing:border-box}
+  body{background:#101010;color:#fff;font-family:Arial,sans-serif;margin:0;padding:0}
+  /* HEADER - TIDAK STICKY LAGI BIAR GAK NUTUPIN BANNER */
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:#0a0a0a}
+  .logo{font-size:28px;font-weight:900}
+  .logo span{color:#ff5722}
+  .search{background:#222;border:3px solid #333;border-radius:999px;padding:12px 20px;color:#fff;width:300px;font-size:16px;outline:none}
+  /* FOKUS REMOTE - INI KUNCINYA */
+  .focusable:focus{border-color:#fff !important;background:#333 !important;outline:3px solid #fff !important;outline-offset:3px;transform:scale(1.05);box-shadow:0 0 0 4px #ff5722, 0 10px 30px rgba(0,0,0,.6)}
+  .hero{margin:16px 32px 0;background:linear-gradient(90deg,#ff5722,#ff8a50);border-radius:20px;padding:28px 30px;display:flex;justify-content:space-between;align-items:center}
+  .hero h1{font-size:32px;margin:0;line-height:1.1}
+  .hero p{color:#ffe8dd;margin:8px 0 0}
+  .hero button{background:#fff;color:#000;border:none;padding:14px 24px;border-radius:999px;font-weight:900;font-size:16px;cursor:pointer}
+  .cats{display:flex;gap:12px;padding:18px 32px 0;overflow-x:auto}
+  .cat{background:#222;border:2px solid transparent;padding:12px 22px;border-radius:999px;white-space:nowrap;cursor:pointer;font-weight:bold;color:#fff;font-size:16px}
+  .cat.active{background:#fff;color:#000}
+  .section{padding:22px 32px 0}
+  .section h2{font-size:21px;margin:0 0 14px}
+  .row{display:flex;gap:18px;overflow-x:auto;padding:6px 6px 14px;scrollbar-width:none}
+  .row::-webkit-scrollbar{display:none}
+  .card{background:#1c1c1c;border-radius:18px;width:230px;flex-shrink:0;padding:16px;text-align:center;border:3px solid transparent}
+  .card img{width:110px;height:110px;border-radius:22px;object-fit:cover;background:#333}
+  .card h3{font-size:19px;margin:12px 0 4px}
+  .card p{font-size:13px;color:#aaa;margin:0;min-height:34px}
+  .stars{color:#ffb400;font-size:14px;margin:6px 0}
+  .meta{font-size:12px;color:#888}
+  .dl{display:block;background:#1a7f37;color:#fff;text-decoration:none;padding:13px;border-radius:999px;font-weight:900;margin-top:12px;font-size:16px}
+  .hint{text-align:center;color:#888;font-size:14px;padding:20px 0 5px}
+  .footer{text-align:center;color:#555;font-size:13px;padding:10px 0 30px}
+  @media(max-width:600px){.topbar{flex-direction:column;gap:12px}.hero{flex-direction:column;text-align:center;gap:16px}.search{width:100%}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">📺 STORE <span>TV</span></div>
+  <input class="search focusable" id="search" placeholder="🔍 Cari aplikasi... (Tekan OK untuk ketik)" tabindex="0">
+</div>
+
+<div class="hero">
+  <div>
+    <h1>Aplikasi TV Terbaik<br>Untuk Kamu.</h1>
+    <p>Streaming, IPTV & Film - Gunakan Remote TV Kamu</p>
+  </div>
+  <button class="focusable" id="btnJelajah" tabindex="0">JELAJAHI ↓</button>
+</div>
+
+<div class="cats" id="cats">
+  <button class="cat focusable active" data-cat="all" tabindex="0">Semua</button>
+  <button class="cat focusable" data-cat="streaming" tabindex="0">Streaming</button>
+  <button class="cat focusable" data-cat="iptv" tabindex="0">IPTV</button>
+  <button class="cat focusable" data-cat="film" tabindex="0">Film</button>
+</div>
+
+<div class="section">
+  <h2>🔥 Populer di TV Kamu</h2>
+  <div class="row" id="list">Loading...</div>
+</div>
+
+<div class="section">
+  <h2>⭐ Pilihan Editor</h2>
+  <div class="row" id="list2">Loading...</div>
+</div>
+
+<div class="hint">◀ ▲ ▼ ▶ Navigasi &nbsp;•&nbsp; OK = Pilih / Install &nbsp;•&nbsp; Back = Ke Atas</div>
+<div class="footer">STORE TV • hgiras.github.io/uupz • v3 Remote Ready</div>
+
+<script>
+let allApps = [];
+function render(apps, elId){
+  const el = document.getElementById(elId);
+  el.innerHTML='';
+  if(!apps.length){el.innerHTML='<p style="color:#888">Tidak ada aplikasi.</p>';return;}
+  apps.forEach(app=>{
+    const div = document.createElement('div');
+    div.className='card focusable';
+    div.tabIndex=0;
+    div.innerHTML=`<img src="${app.icon}" onerror="this.src='https://via.placeholder.com/110'"><h3>${app.nama}</h3><p>${app.deskripsi}</p><div class="stars">★★★★★ 4.8</div><div class="meta">v${app.versi} • ${app.ukuran}</div><a class="dl focusable" href="${app.apk}" tabindex="0">⬇ INSTALL</a>`;
+    // Enter di kartu = langsung klik INSTALL
+    div.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ div.querySelector('.dl').click(); }
+    });
+    el.appendChild(div);
+  });
+}
+function filter(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const cat=document.querySelector('.cat.active').dataset.cat;
+  let f=allApps.filter(a=>{
+    const mq=(a.nama+' '+a.deskripsi).toLowerCase().includes(q);
+    const mc=cat==='all' || (a.deskripsi+' '+a.nama).toLowerCase().includes(cat);
+    return mq&&mc;
+  });
+  render(f,'list');
+}
+fetch('apps.json').then(r=>r.json()).then(apps=>{
+  allApps=apps;
+  render(apps,'list');
+  render([...apps].reverse(),'list2');
+  document.getElementById('search').addEventListener('input', filter);
+  document.querySelectorAll('.cat').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.cat').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active'); filter();
+    });
+  });
+});
+
+// ===== NAVIGASI REMOTE - SPATIAL NAVIGATION =====
+document.addEventListener('keydown', e=>{
+  const focusables=[...document.querySelectorAll('.focusable')].filter(el=>el.offsetParent!==null);
+  const cur=document.activeElement;
+  const idx=focusables.indexOf(cur);
+  if(idx===-1) return;
+  const curRect=cur.getBoundingClientRect();
+  let best=null, bestDist=Infinity;
+  // Cari elemen terdekat searah panah
+  focusables.forEach(el=>{
+    if(el===cur) return;
+    const r=el.getBoundingClientRect();
+    const dx=r.left+r.width/2-(curRect.left+curRect.width/2);
+    const dy=r.top+r.height/2-(curRect.top+curRect.height/2);
+    let ok=false, dist=Math.hypot(dx,dy);
+    if(e.key==='ArrowRight' && dx>20 && Math.abs(dy)<100) ok=true;
+    if(e.key==='ArrowLeft' && dx<-20 && Math.abs(dy)<100) ok=true;
+    if(e.key==='ArrowDown' && dy>20) ok=true;
+    if(e.key==='ArrowUp' && dy<-20) ok=true;
+    if(ok && dist<bestDist){ best=el; bestDist=dist; }
+  });
+  if(best){ e.preventDefault(); best.focus(); best.scrollIntoView({behavior:'smooth', block:'center', inline:'center'}); }
+  // Tombol Back di remote TV
+  if(e.key==='Backspace' || e.key==='Escape'){ window.scrollTo({top:0, behavior:'smooth'}); document.getElementById('search').focus(); }
+});
+document.getElementById('btnJelajah').addEventListener('click', ()=>{ document.getElementById('list').scrollIntoView({behavior:'smooth'}); document.querySelector('#list .card').focus(); });
+// Auto fokus pertama kali buka di TV
+window.addEventListener('load', ()=>{ setTimeout(()=>{ document.querySelector('.cat').focus(); }, 800); });
+</script>
+</body>
+</html>
