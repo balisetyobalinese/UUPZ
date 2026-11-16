@@ -1,4 +1,4 @@
-package com.storetv
+package com.store.tv
 
 import android.app.DownloadManager
 import android.content.*
@@ -29,12 +29,14 @@ class MainActivity : ComponentActivity() {
         request.setMimeType("application/vnd.android.package-archive")
         request.setAllowedOverMetered(true)
 
+        // FIX OS 10: Ojo nganggo Uri.fromFile maneh!
         apkFile = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), namaFile)
-        request.setDestinationUri(Uri.fromFile(apkFile))
+        if (apkFile?.exists() == true) apkFile?.delete()
+        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, namaFile)
 
         val dm = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        val downloadId = dm.enqueue(request)
-
+        downloadId = dm.enqueue(request)
+     }
         // Nek download rampung, langsung muncul BATAL / INSTAL
         context.registerReceiver(object : BroadcastReceiver() {
             override fun onReceive(ctx: Context?, intent: Intent?) {
