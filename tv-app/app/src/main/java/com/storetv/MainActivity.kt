@@ -46,14 +46,13 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun installOtomatis() {
-        val file = apkFile ?: return
-        val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
-        val install = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, "application/vnd.android.package-archive")
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        startActivity(install)
-        // File APK langsung dihapus otomatis bar install, ben gak numpuk
-        // file.delete()
+    val file = apkFile ?: return
+    val uri = FileProvider.getUriForFile(applicationContext, "${applicationContext.packageName}.provider", file)
+    val install = Intent(Intent.ACTION_VIEW).apply {
+        setDataAndType(uri, "application/vnd.android.package-archive")
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
     }
+    applicationContext.startActivity(install)
+    // file.delete()
+ }
 }
