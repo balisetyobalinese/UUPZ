@@ -1,54 +1,59 @@
-package com.storetv
 import android.app.DownloadManager
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.net.Uri
-import android.os.Bundle
 import android.os.Environment
-import android.webkit.URLUtil
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import java.io.File
-class MainActivity : AppCompatActivity() {
-    private lateinit var webView: WebView
-    private var downloadId: Long = -1
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        webView = WebView(this)
-        setContentView(webView)
-        webView.settings.javaScriptEnabled = true
-        webView.settings.domStorageEnabled = true
-        webView.webViewClient = WebViewClient()
-        webView.setDownloadListener { url, _, _, _, _ ->
-            val fileName = URLUtil.guessFileName(url, null, null)
-            Toast.makeText(this, "Mendownload $fileName...", Toast.LENGTH_SHORT).show()
-            val req = DownloadManager.Request(Uri.parse(url))
-            req.setTitle(fileName)
-            req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
-            req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-            val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            downloadId = dm.enqueue(req)
-            registerReceiver(object : BroadcastReceiver() {
-                override fun onReceive(c: Context?, intent: Intent?) {
-                    if (intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadId) {
-                        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName)
-                        val uri = FileProvider.getUriForFile(this@MainActivity, "$packageName.provider", file)
-                        val install = Intent(Intent.ACTION_VIEW).apply {
-                            setDataAndType(uri, "application/vnd.android.package-archive")
-                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        }
-                        startActivity(install)
-                    }
-                }
-            }, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
+class MainActivity : ComponentActivity() {
+
+    private var downloadId: Long = 0
+    private var apkFile: File? = null
+
+    // Fungsi 1 KLIK iki tok sing dipanggil tombol INSTALL
+    fun satuKlikInstall(apkUrl: String, namaFile: String) {
+        // 1. Cek izin install, nek durung, njaluk izin sek
+        if (!packageManager.canRequestPackageInstalls()) {
+            val intent = Intent(android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+            intent.data = Uri.parse("package:$packageName")
+            startActivity(intent)
+            return
         }
-        webView.loadUrl("https://balisetyobalinese.github.io/UUPZ/")
+
+        // 2. Download otomatis, gak usah buka browser
+        val request = DownloadManager.Request(Uri.parse(apkUrl))
+        request.setTitle("Mengunduh $namaFile...")
+        request.setDescription("Mohon tunggu...")
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setMimeType("application/vnd.android.package-archive")
+        request.setAllowedOverMetered(true)
+
+        apkFile = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), namaFile)
+        request.setDestinationUri(Uri.fromFile(apkFile))
+
+        val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        downloadId = dm.enqueue(request)
+
+        // 3. Daftar receiver: nek download rampung, langsung install
+        registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+                if (id == downloadId) {
+                    installOtomatis()
+                }
+            }
+        }, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
     }
-    override fun onBackPressed() { if (webView.canGoBack()) webView.goBack() else super.onBackPressed() }
+
+    private fun installOtomatis() {
+        val file = apkFile ?: return
+        val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
+        val install = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/vnd.android.package-archive")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startActivity(install)
+        // File APK langsung dihapus otomatis bar install, ben gak numpuk
+        // file.delete()
+    }
 }
