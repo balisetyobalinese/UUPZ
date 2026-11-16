@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-feature android:name="android.software.leanback" android:required="true" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-    <application android:label="STORE TV" android:icon="@android:drawable/sym_def_app_icon" android:banner="@mipmap/ic_launcher" android:theme="@style/Theme.AppCompat.NoActionBar">
+    <application android:label="STORE TV" android:icon="@android:drawable/sym_def_app_icon" android:banner="@android:drawable/sym_def_app_icon" android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".MainActivity" android:exported="true" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
