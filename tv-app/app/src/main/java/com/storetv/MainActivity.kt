@@ -1,5 +1,4 @@
 package com.storetv
-
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -15,11 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import java.io.File
-
 class MainActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private var downloadId: Long = -1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         webView = WebView(this)
@@ -27,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
         webView.webViewClient = WebViewClient()
-
         webView.setDownloadListener { url, _, _, _, _ ->
             val fileName = URLUtil.guessFileName(url, null, null)
             Toast.makeText(this, "Mendownload $fileName...", Toast.LENGTH_SHORT).show()
@@ -37,7 +33,6 @@ class MainActivity : AppCompatActivity() {
             req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
             val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             downloadId = dm.enqueue(req)
-
             registerReceiver(object : BroadcastReceiver() {
                 override fun onReceive(c: Context?, intent: Intent?) {
                     if (intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadId) {
@@ -55,7 +50,5 @@ class MainActivity : AppCompatActivity() {
         }
         webView.loadUrl("https://balisetyobalinese.github.io/UUPZ/")
     }
-    override fun onBackPressed() {
-        if (webView.canGoBack()) webView.goBack() else super.onBackPressed()
-    }
+    override fun onBackPressed() { if (webView.canGoBack()) webView.goBack() else super.onBackPressed() }
 }
