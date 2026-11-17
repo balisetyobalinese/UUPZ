@@ -26,10 +26,26 @@
   {
     "nama": "ONN",
     "versi": "v1.7.5",
-    "kategori": "Channel TV",
+    "kategori": "TV Playlist",
     "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
     "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/ON1.7.5.apk",
     "deskripsi": "IPTV TV"
+  },
+  {
+    "nama": "LIVE TVGO",
+    "versi": "v1.4.9",
+    "kategori": "Channel TV",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/LTVGOv1.4.9.apk",
+    "deskripsi": "TV Streaming"
+  },
+  {
+    "nama": "APTOIDE",
+    "versi": "v5.1.2",
+    "kategori": "Store TV",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/APv5.1.2.apk",
+    "deskripsi": "STORE TV"
   },
   {
     "nama": "Gvision",
