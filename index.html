@@ -25,10 +25,12 @@
   .section h2{font-size:21px;margin:0 0 14px}
   .row{display:flex;gap:18px;overflow-x:auto;padding:6px 6px 14px;scrollbar-width:none}
   .row::-webkit-scrollbar{display:none}
-  .card{background:#1c1c1c;border-radius:18px;width:230px;flex-shrink:0;padding:16px;text-align:center;border:3px solid transparent}
-  .card img{width:110px;height:110px;border-radius:22px;object-fit:cover;background:#333}
-  .card h3{font-size:19px;margin:12px 0 4px}
-  .card p{font-size:13px;color:#aaa;margin:0;min-height:34px}
+  .card{display:flex;gap:12px;align-items:flex-start;text-align:left}
+  .card-logo{width:70px;height:70px;border-radius:18px;object-fit:cover;cursor:pointer;flex-shrink:0}
+  .card-info{flex:1}
+  .card-info h3{margin:0 0 4px;font-size:18px}
+  .card-info p{margin:0 0 6px;font-size:13px;color:#aaa}
+  .card-info .meta{font-size:12px;color:#888;margin-bottom:10px}
   .meta{font-size:12px;color:#888}
   .dl{display:block;background:#1a7f37;color:#fff;text-decoration:none;padding:13px;border-radius:999px;font-weight:900;margin-top:12px;font-size:16px}
   .hint{text-align:center;color:#888;font-size:14px;padding:20px 0 5px}
@@ -50,15 +52,7 @@
   <button class="cat focusable" data-cat="film" tabindex="0">Film</button>
 </div>
 
-<div class="section">
-  <h2>🔥 Populer di TV Kamu</h2>
-  <div class="row" id="list">Loading...</div>
-</div>
-
-<div class="section">
-  <h2>⭐ Pilihan Editor</h2>
-  <div class="row" id="list2">Loading...</div>
-</div>
+<div class="row" id="list">Loading...</div>
 
 <div class="hint">◀ ▲ ▼ ▶ Navigasi &nbsp;•&nbsp; OK = Pilih / Install &nbsp;•&nbsp; Back = Ke Atas</div>
 <div class="footer">STORE TV • hgiras.github.io/uupz • v3 Remote Ready</div>
@@ -73,7 +67,7 @@ function render(apps, elId){
     const div = document.createElement('div');
     div.className='card focusable';
     div.tabIndex=0;
-    div.innerHTML=`<img src="${app.icon}" onerror="this.src='https://via.placeholder.com/110'"><h3>${app.nama}</h3><p>${app.deskripsi}</p><div class="stars">★★★★★ 4.8</div><div class="meta">v${app.versi} • ${app.ukuran}</div><a class="dl focusable" href="${app.apk}" tabindex="0">⬇ INSTALL</a>`;
+    div.innerHTML='<img src="${app.icon}" onerror="this.src=\'https://via.placeholder.com/110\'" class="card-logo" onclick="this.parentElement.querySelector(\'.dl\').click()"><div class="card-info"><h3>${app.nama}</h3><p>${app.deskripsi}</p><div class="meta">v${app.version}</div><button class="dl">INSTALL</button></div>';
     // Enter di kartu = langsung klik INSTALL
     div.addEventListener('keydown', e=>{
       if(e.key==='Enter'){ div.querySelector('.dl').click(); }
@@ -94,7 +88,6 @@ function filter(){
 fetch('apps.json').then(r=>r.json()).then(apps=>{
   allApps=apps;
   render(apps,'list');
-  render([...apps].reverse(),'list2');
   document.getElementById('search').addEventListener('input', filter);
   document.querySelectorAll('.cat').forEach(btn=>{
     btn.addEventListener('click', ()=>{
