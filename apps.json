@@ -8,6 +8,22 @@
     "deskripsi": "TV Online Gratis"
   },
   {
+    "nama": "RB.TV",
+    "versi": "v3.2.2",
+    "kategori": "Channel Sport",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/onn.png",
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/RB.TV.apk",
+    "deskripsi": "TV SPORT"
+  },
+  {
+    "nama": "ION",
+    "versi": "v11.0",
+    "kategori": "Channel TV",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/onn.png",
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/itv.11.apk",
+    "deskripsi": "TV Streaming"
+  },
+  {
     "nama": "ONN",
     "versi": "v1.7.5",
     "kategori": "Channel TV",
