@@ -3,7 +3,7 @@
     "nama": "Dopamin",
     "versi": "v1.0.8",
     "kategori": "Channel TV",
-    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/dopamin.png",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
     "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/DT1.0.8.apk",
     "deskripsi": "TV Online Gratis"
   },
@@ -11,7 +11,7 @@
     "nama": "RB.TV",
     "versi": "v3.2.2",
     "kategori": "Channel Sport",
-    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/onn.png",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
     "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/RB.TV.apk",
     "deskripsi": "TV SPORT"
   },
@@ -19,7 +19,7 @@
     "nama": "ION",
     "versi": "v11.0",
     "kategori": "Channel TV",
-    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/onn.png",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
     "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/itv.11.apk",
     "deskripsi": "TV Streaming"
   },
@@ -27,7 +27,7 @@
     "nama": "ONN",
     "versi": "v1.7.5",
     "kategori": "Channel TV",
-    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/onn.png",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
     "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/ON1.7.5.apk",
     "deskripsi": "IPTV TV"
   },
@@ -35,7 +35,7 @@
     "nama": "Gvision",
     "versi": "v3.0",
     "kategori": "Movie",
-    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/gvision.png",
+    "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/android.png",
     "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/GV3.apk",
     "deskripsi": "TV Streaming"
   }
