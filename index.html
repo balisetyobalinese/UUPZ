@@ -44,13 +44,6 @@
   <input class="search focusable" id="search" placeholder="🔍 Cari aplikasi... (Tekan OK untuk ketik)" tabindex="0">
 </div>
 
-<div class="cats" id="cats">
-  <button class="cat focusable active" data-cat="all" tabindex="0">Semua</button>
-  <button class="cat focusable" data-cat="streaming" tabindex="0">Streaming</button>
-  <button class="cat focusable" data-cat="iptv" tabindex="0">IPTV</button>
-  <button class="cat focusable" data-cat="film" tabindex="0">Film</button>
-</div>
-
 <div class="row" id="list">Loading...</div>
 
 <div class="hint">◀ ▲ ▼ ▶ Navigasi &nbsp;•&nbsp; OK = Pilih / Install &nbsp;•&nbsp; Back = Ke Atas</div>
@@ -66,7 +59,7 @@ function render(apps, elId){
     const div = document.createElement('div');
     div.className='card focusable';
     div.tabIndex=0;
-    div.innerHTML=`<img src="${app.icon}" onerror="this.src='https://via.placeholder.com/110'" class="card-logo"><div class="card-info"><h3>${app.nama}</h3><p>${app.deskripsi}</p><div class="meta">v${app.version}</div></div>`;
+    div.innerHTML=`<img src="${app.icon}" onerror="this.src='https://via.placeholder.com/110'" class="card-logo"><div class="card-info"><h3>${app.nama}</h3><p>${app.deskripsi}</p></div>`;
     div.addEventListener('click', ()=>{
       window.open(app.apkUrl, '_blank');
     });
