@@ -12,8 +12,8 @@
     "versi": "v1.7.5",
     "kategori": "Channel TV",
     "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/onn.png",
-    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/ONN-v1.7.5.apk",
-    "deskripsi": "Channel TV"
+    "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/ON1.7.5.apk",
+    "deskripsi": "IPTV TV"
   },
   {
     "nama": "Gvision",
@@ -21,6 +21,6 @@
     "kategori": "Movie",
     "icon": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/icon/gvision.png",
     "url": "https://raw.githubusercontent.com/balisetyobalinese/UUPZ/main/GV3.apk",
-    "deskripsi": "Nonton Movie"
+    "deskripsi": "TV Streaming"
   }
 ]
